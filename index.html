@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiftbyCaifaa - Premium Maroon Florist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --maroon-deep: #4d0000;
+            --maroon-main: #800000;
+            --gold: #ffd700;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--maroon-main);
+            background-image: 
+                linear-gradient(rgba(77, 0, 0, 0.95), rgba(128, 0, 0, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0 12c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm-20 4c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm40 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 28c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm40 0c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMASI BUNGA BERGUGURAN --- */
+        .flower-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .petal {
+            position: absolute;
+            background-color: #ffc0cb;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); text-decoration: none; }
+        .logo-img { height: 40px; width: 40px; border-radius: 50%; border: 1px solid var(--gold); }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; }
+        .btn-nav { border: 1px solid var(--gold); padding: 8px 15px; border-radius: 5px; color: var(--gold) !important; }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 80px 8%; 
+            min-height: 70vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        .hero-text { flex: 1.2; text-align: left; }
+        .hero-image { flex: 0.8; display: flex; justify-content: flex-end; }
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3.2rem; 
+            line-height: 1.2;
+            color: var(--white); 
+            margin-bottom: 20px; 
+        }
+        .hero-image img { 
+            width: 100%; 
+            max-width: 450px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 2px solid var(--glass);
+        }
+
+        /* --- SECTION HEADERS --- */
+        .section-header { text-align: center; margin-bottom: 50px; padding-top: 40px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin: 0; }
+        .divider { width: 60px; height: 3px; background: var(--gold); margin: 15px auto; }
+
+        /* --- PRICELIST --- */
+        .pricelist-section { padding: 60px 5%; }
+        .pricelist-row { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .img-pricelist-custom { width: 100%; max-width: 450px; border-radius: 15px; border: 2px solid var(--glass); }
+
+        /* --- KATALOG PRODUK IMPROVED --- */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 15px; 
+            border-radius: 20px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efek Hover */
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Efek Klik Animasi */
+        .card:active {
+            transform: scale(0.92);
+            filter: brightness(1.2);
+        }
+
+        .card-img { 
+            height: 300px; 
+            overflow: hidden; 
+            border-radius: 15px; 
+            margin-bottom: 15px; 
+            background: rgba(0,0,0,0.2); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Gambar tidak terpotong */
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.08);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            height: 50px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .price { 
+            color: var(--gold); 
+            font-weight: 600; 
+            font-size: 1.3rem; 
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- FORM ORDER --- */
+        .order-section { padding: 80px 5%; }
+        .order-card { 
+            background: rgba(0, 0, 0, 0.5); 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 40px; 
+            border-radius: 25px; 
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(15px);
+        }
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px; 
+        }
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .input-box label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-left: 5px;
+        }
+        .full-width { grid-column: span 2; }
+        
+        input, select, textarea { 
+            width: 100%; 
+            padding: 14px 18px; 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1.5px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            color: white; 
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        select option { 
+            color: #800000 !important; 
+            background: white !important; 
+        }
+
+        .btn-whatsapp { 
+            grid-column: span 2; 
+            background: linear-gradient(135deg, #25d366, #128c7e); 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            font-size: 1.1rem;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        footer { background: #330000; padding: 40px; text-align: center; }
+
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width, .btn-whatsapp { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flower-container" id="flower-container"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
+                GiftbyCaifaa
+            </a>
+            <div class="nav-links">
+                <a href="#pricelist">Pricelist</a>
+                <a href="#katalog">Katalog</a>
+                <a href="#order" class="btn-nav">Pesan Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Hadiah Terindah untuk Momen Spesial Anda</h1>
+            <p>Rangkaian bunga pilihan yang dirangkai dengan kasih sayang.</p>
+        </div>
+        <div class="hero-image">
+            <img src="images/pict.jpeg" alt="Premium Bouquet">
+        </div>
+    </header>
+
+    <main>
+        <section id="pricelist" class="pricelist-section">
+            <div class="section-header">
+                <h2>Daftar Harga</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="pricelist-row">
+                <img src="images/pricelist1.jpeg" class="img-pricelist-custom">
+                <img src="images/pricelist2.jpeg" class="img-pricelist-custom">
+            </div>
+        </section>
+
+        <section id="katalog" class="catalog-section">
+            <div class="section-header">
+                <h2>Katalog Produk</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="product-grid">
+                <div class="card" onclick="pilihBunga('Buket Kosong')">
+                    <div class="card-img"><img src="images/bunga1.jpeg"></div>
+                    <h3>Buket Kosong</h3><span class="price">Rp 26.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Bunga Pita Satin Navy')">
+                    <div class="card-img"><img src="images/bunga2.jpeg"></div>
+                    <h3>Bunga Pita Satin Navy (8 tangkai)</h3><span class="price">Rp 101.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Name Wisuda')">
+                    <div class="card-img"><img src="images/bunga3.jpeg"></div>
+                    <h3>Buket Name Wisuda (2 tangkai)</h3><span class="price">Rp 87.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Boneka')">
+                    <div class="card-img"><img src="images/bunga4.jpeg"></div>
+                    <h3>Buket Boneka </h3><span class="price">Rp 122.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Pita Satin Maroon (5 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga5.jpeg"></div>
+                    <h3>Pita Satin Maroon (5 Tangkai)</h3><span class="price">Rp 47.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Pita Satin Maroon (15 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga6.jpeg"></div>
+                    <h3>Pita Satin Maroon (15 Tangkai)</h3><span class="price">Rp 127.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Pita Satin Blue Mini (5 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga7.jpeg"></div>
+                    <h3>Pita Satin Blue Mini (5 Tangkai)</h3><span class="price">Rp 40.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Pita Satin Black (8 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga8.jpeg"></div>
+                    <h3>Pita Satin Black (8 Tangkai)</h3><span class="price">Rp 80.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Satin + Jedai Mini (2 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga9.jpeg"></div>
+                    <h3>Satin + Jedai Mini (2 Tangkai)</h3><span class="price">Rp 35.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Pita Satin Pink (6 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga10.jpeg"></div>
+                    <h3>Pita Satin Pink (6 Tangkai)</h3><span class="price">Rp 55.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Uang')">
+                    <div class="card-img"><img src="images/bunga13.jpeg"></div>
+                    <h3>Buket Uang</h3><span class="price">Rp 65.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga14.jpeg"></div>
+                    <h3>Buket Pink Royal (20 Tangkai)</h3><span class="price">Rp 167.000</span>
+                </div>
+                   <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga11.jpeg"></div>
+                    <h3>Gift Box Mini</h3><span class="price">Rp 26.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga15.jpeg"></div>
+                    <h3>Buket Boneka</h3><span class="price">Rp 20.000</span>
+                </div>
+                 <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga22.jpeg"></div>
+                    <h3>Buket Bunga Pita Satin Maroon (20 tangkai)</h3><span class="price">Rp 133.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga18.jpeg"></div>
+                    <h3>Buket Bunga Pita Satin Pink (3 tangkai)</h3><span class="price">Rp 36.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga17.jpeg"></div>
+                    <h3>Buket Bunga Pita Satin Blue+Boneka Love</h3><span class="price">Rp 38.000</span>
+                </div>
+                <div class="card" onclick="pilihBunga('Buket Pink Royal (20 Tangkai)')">
+                    <div class="card-img"><img src="images/bunga19.jpeg"></div>
+                    <h3>Custom per tangkai Bunga Pita Satin</h3><span class="price">Rp 5.000-6.000</span>
+                </div>
+        
+        
+        
+            </div>
+        </section>
+
+        <section id="order" class="order-section">
+            <div class="order-card">
+                <div class="form-grid">
+                    <div class="input-box">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="nama" placeholder="Nama Anda...">
+                    </div>
+                    <div class="input-box">
+                        <label>Produk Terpilih</label>
+                        <input type="text" id="produk" placeholder="Klik pada katalog...">
+                    </div>
+                    <div class="input-box full-width">
+                        <label>Tambahan Aksesoris</label>
+                        <select id="aksesoris">
+                            <option value="Tanpa Tambahan">Tanpa Tambahan</option>
+                            <option value="Tile Salju (9k)">Tile Salju (9k)</option>
+                            <option value="Lampu LED (6k)">Lampu LED (6k)</option>
+                            <option value="Boneka Wisuda (15k)">Boneka Wisuda (15k)</option>
+                            <option value="Kupu-kupu (9k)">Kupu-kupu (9k)</option>
+                            <option value="Mahkota Mini (15k)">Mahkota Mini (15k)</option>
+                        </select>
+                    </div>
+                    <div class="input-box full-width">
+                        <label>Alamat & Detail Request</label>
+                        <textarea id="alamat" rows="4"></textarea>
+                    </div>
+                    <button type="button" class="btn-whatsapp" onclick="kirimKeWA()">KIRIM KE WHATSAPP</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GiftbyCaifaa. Made with Love.</p>
+    </footer>
+
+    <script>
+        function createPetal() {
+            const container = document.getElementById('flower-container');
+            const petal = document.createElement('div');
+            const size = Math.random() * 10 + 10 + 'px';
+            petal.className = 'petal';
+            petal.style.width = size; petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            container.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 6000);
+        }
+        setInterval(createPetal, 450);
+
+        function pilihBunga(nama) {
+            document.getElementById('produk').value = nama;
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function kirimKeWA() {
+            const nama = document.getElementById('nama').value;
+            const produk = document.getElementById('produk').value;
+            const aksesoris = document.getElementById('aksesoris').value;
+            const alamat = document.getElementById('alamat').value;
+            if(!nama || !produk) { alert("Isi nama dan pilih produk dulu ya!"); return; }
+            const pesan = `Halo GiftbyCaifaa!%0A%0A*PESANAN BARU*%0A*Nama:* ${nama}%0A*Produk:* ${produk}%0A*Aksesoris:* ${aksesoris}%0A*Detail:* ${alamat}`;
+            window.open(`https://wa.me/6281263000719?text=${pesan}`, '_blank');
+        }
+    </script>
+</body>
+</html>
