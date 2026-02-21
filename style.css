@@ -266,10 +266,36 @@ footer {
     padding: 4rem 5%;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .full-width, .btn-whatsapp { grid-column: span 1; }
-    .order-card { padding: 30px 20px; }
-    .hero-text h1 { font-size: 2.2rem; }
+/* ============================= */
+/* PAKSA LAYOUT SAMA SEPERTI LAPTOP */
+/* ============================= */
+
+@media (max-width: 992px) {
+
+    .hero {
+        flex-direction: row !important;
+        text-align: left !important;
+        gap: 40px !important;
+    }
+
+    .hero-text {
+        text-align: left !important;
+    }
+
+    .hero-image {
+        justify-content: flex-end !important;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .full-width {
+        grid-column: span 2 !important;
+    }
+
+    .btn-whatsapp {
+        grid-column: span 2 !important;
+    }
+
 }
